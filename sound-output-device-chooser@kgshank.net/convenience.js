@@ -52,8 +52,8 @@ function getSettings(schema) {
 
     let schemaObj = schemaSource.lookup(schema, true);
     if (!schemaObj)
-        throw new Error('Schema ' + schema + ' could not be found for extension '
-                + extension.metadata.uuid + '. Please check your installation.');
+        throw new Error('Schema ' + schema + ' could not be found for extension ' +
+                extension.metadata.uuid + '. Please check your installation.');
 
     return new Gio.Settings({ settings_schema: schemaObj });
 }
@@ -69,7 +69,7 @@ function getProfiles(control, uidevice)
 
         if(cards && cards[stream.card_index]) {
             global.log("Getting profile form stream id " + uidevice.port_name );
-        	return getProfilesForPort(uidevice.port_name, cards[stream.card_index]);
+            return getProfilesForPort(uidevice.port_name, cards[stream.card_index]);
         }
     }
     else
@@ -181,38 +181,38 @@ const Signal = new Lang.Class({
 });
 
 var SignalManager = new Lang.Class({
-	Name: 'SignalManager',
+    Name: 'SignalManager',
 
-	_init: function() {
-		this._signals = [];
-		this._signalsBySource = {};
-	},
+    _init: function() {
+        this._signals = [];
+        this._signalsBySource = {};
+    },
 
-	addSignal: function(signalSource, signalName, callback) {
-		let obj = null;
-		if(signalSource && signalName && callback) {
+    addSignal: function(signalSource, signalName, callback) {
+        let obj = null;
+        if(signalSource && signalName && callback) {
             obj = new Signal(signalSource, signalName, callback);
             obj.connect();
             this._signals.push(obj);
             if(!this._signalsBySource[signalSource]) {
-            	this._signalsBySource[signalSource] = [];
+                this._signalsBySource[signalSource] = [];
             }
-            this._signalsBySource[signalSource].push(obj)
+            this._signalsBySource[signalSource].push(obj);
         }
-		return obj;
+        return obj;
     },
 
     disconnectAll: function() {
-    	for (let signal of this._signals){
-    		signal.disconnect();
-    	}
+        for (let signal of this._signals){
+            signal.disconnect();
+        }
     },
 
     disconnectBySource: function(signalSource) {
-    	if(this._signalsBySource[signalSource]) {
-    		for (let signal of this._signalsBySource[signalSource]) {
-    			signal.disconnect();
-    		}
+        if(this._signalsBySource[signalSource]) {
+            for (let signal of this._signalsBySource[signalSource]) {
+                signal.disconnect();
+            }
         }
     }
 });

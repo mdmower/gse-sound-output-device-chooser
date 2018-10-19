@@ -123,11 +123,11 @@ const SoundDeviceChooserBase = new Lang.Class({
             if(!uidevice) {
                 return null;
             }
-            obj = new Object();
+            obj = {};
             obj.uidevice = uidevice;
             obj.text = uidevice.description;
             if(uidevice.origin != "")
-            	obj.text += "\n(" + uidevice.origin + ")";
+                obj.text += "\n(" + uidevice.origin + ")";
             obj.item = this.menu.addAction( obj.text, Lang.bind(this,function() {
                 this.changeDevice(uidevice);
             }));
@@ -155,7 +155,7 @@ const SoundDeviceChooserBase = new Lang.Class({
         
         if (obj.profiles) {
             for (let profile of obj.profiles) {
-            	global.log(profile.name)
+                global.log(profile.name);
             }
         }
 
@@ -179,7 +179,7 @@ const SoundDeviceChooserBase = new Lang.Class({
                         control.change_profile_on_selected_device(uidevice, profileName);
                         this._setDeviceActiveProfile(obj);
                     }));
-	
+
                     obj.profilesitems[profileName] = profileItem;
                     profileItem.setProfileActive = function(active) {
                         if(active) {
@@ -271,10 +271,10 @@ const SoundDeviceChooserBase = new Lang.Class({
     },
 
     _setActiveProfile: function() {
-    	for (let id in this._devices) {
-    	    let device = this._devices[id];
-    	    if(device.active) {
-    	        this._setDeviceActiveProfile(device);
+        for (let id in this._devices) {
+            let device = this._devices[id];
+            if(device.active) {
+                this._setDeviceActiveProfile(device);
             }
         }
         return true;
@@ -339,8 +339,8 @@ const SoundDeviceChooserBase = new Lang.Class({
 
     _setIcons: function() {
         // Set the icons in the selection list
-    	for (let id in this._devices) {
-    	    let device = this._devices[id];
+        for (let id in this._devices) {
+            let device = this._devices[id];
             let icon = device.uidevice.get_icon_name();
             if(icon == null || icon.trim() == "")
                 icon = this.getDefaultIcon();

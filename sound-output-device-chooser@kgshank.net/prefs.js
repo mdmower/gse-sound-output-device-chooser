@@ -78,7 +78,7 @@ const SDCSettingsWidget = new GObject.Class({
             this.pack_start(mainContainer, true, true, 0);
 
             this._signalManager = new SignalManager();
-            
+
             let showProfileSwitch = builder.get_object("show-profile");
             let singleDeviceSwitch = builder.get_object("single-device");
             let showInputSliderSwitch = builder.get_object("show-input-slider");
